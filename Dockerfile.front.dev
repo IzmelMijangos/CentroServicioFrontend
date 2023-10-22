@@ -1,0 +1,15 @@
+# Usar una imagen base de Node
+FROM node:16
+
+# Crear y establecer el directorio de trabajo
+WORKDIR /app_centroservicio_front
+
+# Instalar las dependencias
+COPY CentroServicioFrontend/package.json CentroServicioFrontend/package-lock.json /app_centroservicio_front/
+RUN npm install
+
+# Copiar el proyecto al contenedor
+COPY CentroServicioFrontend/ /app_centroservicio_front/
+
+# Iniciar la aplicación
+CMD ["npm", "start"]

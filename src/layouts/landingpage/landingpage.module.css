@@ -1,0 +1,121 @@
+.section {
+    padding: 4rem 2rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .section h2 {
+    color: #333;
+    margin-bottom: 2rem;
+  }
+  
+  .contact-section, .subscription-section {
+    background-color: #f7f7f7;
+  }
+  
+  .form-input, .form-textarea, .form-button {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .form-button {
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-button:hover {
+    background-color: #04c2c9;
+  }
+  
+  footer {
+    padding: 2rem 1rem;
+    background-color: #333;
+    color: white;
+    text-align: center;
+  }
+
+  .inventorySection {
+    background-color: #f6f9fc;
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  .salesRecordSection {
+    background-color: #ffffff;
+    padding: 60px 0;
+    text-align: center;
+    /* Otros estilos */
+  }
+  
+  .technicianWorkOrderSection {
+    background-color: #f6f9fc;
+    padding: 60px 0;
+    text-align: center;
+    /* Otros estilos */
+  }
+  
+  .customerTicketTrackingSection {
+    background-color: #ffffff;
+    padding: 60px 0;
+    text-align: center;
+    /* Otros estilos */
+  }
+
+  .subscriptionSection {
+    background-color: #8898aa;
+    padding: 60px 0;
+    text-align: center;
+    color: var(--color-white);
+    /* Otros estilos */
+  }
+
+  .form {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: var(--color-white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  
+  .inputField {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--color-gray-dark);
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .textareaField {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--color-gray-dark);
+    border-radius: 4px;
+    height: 150px;
+    font-size: 1rem;
+    resize: vertical;
+  }
+  
+  .submitButton {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    background-color: var(--color-cyan);
+    color: var(--color-white);
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submitButton:hover {
+    background-color: darken(var(--color-cyan), 10%);
+  }
+  

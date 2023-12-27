@@ -32,41 +32,60 @@ import SoftButton from "components/SoftButton";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 import Socials from "layouts/authentication/components/Socials";
 import Separator from "layouts/authentication/components/Separator";
+import { useNavigate  } from "react-router-dom"; // Import para redirigir al usuario
 
 // Images
 import curved6 from "assets/images/curved-images/curved14.jpg";
 
 function SignUp() {
+  const navigate = useNavigate();
   const [agreement, setAgremment] = useState(true);
 
   const handleSetAgremment = () => setAgremment(!agreement);
 
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+
+    if (!agreement) {
+      alert("Debes aceptar los términos y condiciones.");
+      return;
+    }
+
+    try {
+      const response = await axios.post('/api/register', formValues);
+      if (response.data.checkout_url) {
+        // Redirige al usuario a la URL de pago de Stripe
+        window.location.href = response.data.checkout_url;
+      } else {
+        // Manejar falta de checkout_url en la respuesta
+        // Aquí podrías usar navigate para redirigir a otra ruta en caso de éxito
+        // Ejemplo: navigate('/dashboard');
+      }
+    } catch (error) {
+      console.error("Error durante el registro", error);
+      // Manejar el error en la interfaz de usuario
+    }
+  };
+
   return (
     <BasicLayout
-      title="Welcome!"
-      description="Use these awesome forms to login or create new account in your project for free."
+      title="Bienvenido!"
       image={curved6}
     >
       <Card>
         <SoftBox p={3} mb={1} textAlign="center">
-          <SoftTypography variant="h5" fontWeight="medium">
-            Register with
-          </SoftTypography>
+          
         </SoftBox>
-        <SoftBox mb={2}>
-          <Socials />
-        </SoftBox>
-        <Separator />
         <SoftBox pt={2} pb={3} px={3}>
           <SoftBox component="form" role="form">
             <SoftBox mb={2}>
-              <SoftInput placeholder="Name" />
+              <SoftInput placeholder="Nombre" />
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftInput type="email" placeholder="Email" />
+              <SoftInput type="email" placeholder="Correo Electrónico" />
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftInput type="password" placeholder="Password" />
+              <SoftInput type="password" placeholder="Contraseña" />
             </SoftBox>
             <SoftBox display="flex" alignItems="center">
               <Checkbox checked={agreement} onChange={handleSetAgremment} />
@@ -76,7 +95,7 @@ function SignUp() {
                 onClick={handleSetAgremment}
                 sx={{ cursor: "poiner", userSelect: "none" }}
               >
-                &nbsp;&nbsp;I agree the&nbsp;
+                &nbsp;&nbsp;Acepto&nbsp;
               </SoftTypography>
               <SoftTypography
                 component="a"
@@ -85,17 +104,17 @@ function SignUp() {
                 fontWeight="bold"
                 textGradient
               >
-                Terms and Conditions
+                Terminos y Condiciones
               </SoftTypography>
             </SoftBox>
             <SoftBox mt={4} mb={1}>
               <SoftButton variant="gradient" color="dark" fullWidth>
-                sign up
+                Registrar
               </SoftButton>
             </SoftBox>
             <SoftBox mt={3} textAlign="center">
               <SoftTypography variant="button" color="text" fontWeight="regular">
-                Already have an account?&nbsp;
+                Ya cuentas con una cuenta?&nbsp;
                 <SoftTypography
                   component={Link}
                   to="/authentication/sign-in"
@@ -104,7 +123,7 @@ function SignUp() {
                   fontWeight="bold"
                   textGradient
                 >
-                  Sign in
+                  Inicio de sesión
                 </SoftTypography>
               </SoftTypography>
             </SoftBox>

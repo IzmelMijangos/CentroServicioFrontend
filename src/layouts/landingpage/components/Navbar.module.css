@@ -1,0 +1,69 @@
+/* .navbar {
+    background-color: #333;
+    color: white;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo img {
+    height: 50px;
+  }
+  
+  .navLinks {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .navLinks li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .navLinks li a:hover {
+    color: #04c2c9;
+  } */
+
+  /* En src/components/Navbar.module.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #000;
+  color: #fff;
+}
+
+.navMenu {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.navMenu li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.authButtons button {
+  background-color: #11cdef;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-left: 0.5rem;
+}
+
+/* Estilos para las otras secciones siguiendo el mismo patrón */
+
+/* En src/sections/WelcomeSection.module.css */
+.welcomeSection {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: #252f3e; /* Asumiendo que este es el color de fondo */
+  color: #fff;
+}
+
+/* Y así sucesivamente para los otros módulos de CSS de cada sección */

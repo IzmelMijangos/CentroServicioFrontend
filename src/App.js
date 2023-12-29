@@ -123,7 +123,7 @@ export default function App() {
       </Icon>
     </SoftBox>
   );
-  const shouldShowSidenav = pathname !== "/";
+  const shouldShowSidenav = pathname !== "/" && pathname !== "/planes";
 
   return direction === "rtl" ? (
     <CacheProvider value={rtlCache}>

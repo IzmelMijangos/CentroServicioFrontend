@@ -1,20 +1,7 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v4.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 
 import { useState } from "react";
 
+import axios from "axios"; 
 // react-router-dom components
 import { Link } from "react-router-dom";
 
@@ -33,6 +20,8 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 import Socials from "layouts/authentication/components/Socials";
 import Separator from "layouts/authentication/components/Separator";
 import { useNavigate  } from "react-router-dom"; // Import para redirigir al usuario
+import { useLocation } from 'react-router-dom';
+
 
 // Images
 import curved6 from "assets/images/curved-images/curved14.jpg";
@@ -40,6 +29,23 @@ import curved6 from "assets/images/curved-images/curved14.jpg";
 function SignUp() {
   const navigate = useNavigate();
   const [agreement, setAgremment] = useState(true);
+  const location = useLocation(); 
+  const [formValues, setFormValues] = useState({
+    username: '',
+    email: '',
+    password: '',
+    plan: location.state?.plan || 'Plan Básico',
+  });
+  const [error, setError] = useState("");
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'username') {
+      setFormValues({ ...formValues, [name]: value.replace(/\s/g, '') });
+    } else {
+      setFormValues({ ...formValues, [name]: value });
+    }
+  };
 
   const handleSetAgremment = () => setAgremment(!agreement);
 
@@ -52,40 +58,41 @@ function SignUp() {
     }
 
     try {
-      const response = await axios.post('/api/register', formValues);
+      const response = await axios.post('http://127.0.0.1:8000/api/accounts/register/',{formValues,plan: formValues.plan});
       if (response.data.checkout_url) {
-        // Redirige al usuario a la URL de pago de Stripe
         window.location.href = response.data.checkout_url;
       } else {
-        // Manejar falta de checkout_url en la respuesta
-        // Aquí podrías usar navigate para redirigir a otra ruta en caso de éxito
-        // Ejemplo: navigate('/dashboard');
+        navigate('/dashboard');
       }
     } catch (error) {
       console.error("Error durante el registro", error);
-      // Manejar el error en la interfaz de usuario
+      setError("Error durante el registro. Inténtalo de nuevo.");
     }
   };
 
   return (
-    <BasicLayout
-      title="Bienvenido!"
-      image={curved6}
-    >
+    <BasicLayout title="Bienvenido!" image={curved6}>
       <Card>
         <SoftBox p={3} mb={1} textAlign="center">
-          
         </SoftBox>
         <SoftBox pt={2} pb={3} px={3}>
-          <SoftBox component="form" role="form">
+          <SoftBox component="form" role="form" onSubmit={handleSignUp}>
             <SoftBox mb={2}>
-              <SoftInput placeholder="Nombre" />
+            <SoftInput 
+              placeholder="Nombre de usuario" 
+              name="username"
+              value={formValues.username}
+              onChange={handleInputChange}
+              pattern="[\w.@+-]+" // Este patrón permite letras, números y los caracteres @ . + - _
+              title="El nombre de usuario puede contener solo letras, números, y @/./+/-/_ caracteres."
+              required 
+            />
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftInput type="email" placeholder="Correo Electrónico" />
+              <SoftInput type="email" placeholder="Correo Electrónico" name="email" value={formValues.email} onChange={handleInputChange} />
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftInput type="password" placeholder="Contraseña" />
+              <SoftInput type="password" placeholder="Contraseña" name="password" value={formValues.password} onChange={handleInputChange}/>
             </SoftBox>
             <SoftBox display="flex" alignItems="center">
               <Checkbox checked={agreement} onChange={handleSetAgremment} />
@@ -108,10 +115,15 @@ function SignUp() {
               </SoftTypography>
             </SoftBox>
             <SoftBox mt={4} mb={1}>
-              <SoftButton variant="gradient" color="dark" fullWidth>
+              <SoftButton variant="gradient" color="dark" fullWidth type="submit">
                 Registrar
               </SoftButton>
             </SoftBox>
+            {error && (
+              <SoftBox mt={2}>
+                <SoftTypography color="error">{error}</SoftTypography>
+              </SoftBox>
+            )}
             <SoftBox mt={3} textAlign="center">
               <SoftTypography variant="button" color="text" fontWeight="regular">
                 Ya cuentas con una cuenta?&nbsp;

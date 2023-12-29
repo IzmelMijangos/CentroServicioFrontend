@@ -8,6 +8,7 @@ import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import LandingPage from "layouts/landingpage";
+import Plans from "layouts/landingpage/components/SubscriptionPlans";
 
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
@@ -100,6 +101,15 @@ const routes = [
     route: "/authentication/sign-up",
     icon: <SpaceShip size="12px" />,
     component: <SignUp />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Planes",
+    key: "planes",
+    route: "/planes",
+    icon: <Office size="12px" />,
+    component: <Plans/>,
     noCollapse: true,
   },
 ];

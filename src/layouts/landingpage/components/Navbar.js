@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Navbar.module.css';
+import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const Navbar = () => {
@@ -13,7 +14,7 @@ const Navbar = () => {
       </ul>
       <div className={styles.authButtons}>
         <button>Iniciar sesión</button>
-        <a href="/app/register">Planes</a>
+        <Link to="/planes">Planes</Link>
       </div>
     </nav>
   );

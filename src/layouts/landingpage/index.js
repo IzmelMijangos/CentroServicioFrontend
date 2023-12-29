@@ -10,11 +10,6 @@ import ContactForm from './ContactForm';
 import SubscriptionSection from './SubscriptionSection';
 import styles from './landingpage.module.css';
 
-import SubscriptionPlans from './components/SubscriptionPlans';
-
-
-
-
 const LandingPage = () => {
 
   return (
